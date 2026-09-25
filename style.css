@@ -81,6 +81,20 @@ section { scroll-margin-top: 76px; }
 .downloads { padding: 110px 0; }
 .download-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 70px; align-items: center; }
 .download-box { padding: 34px; border: 1px solid var(--line); background: linear-gradient(135deg, var(--panel), var(--violet)); }
+.drive-header, .drive-account { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.drive-header strong { display: block; font-family: 'Playfair Display', serif; font-size: 24px; }
+.drive-subtitle, .drive-status, .drive-config-note, .drive-setup-note span { display: block; color: var(--muted); font-size: 12px; }
+.drive-subtitle { margin-top: 3px; }
+.google-login, .drive-logout, .drive-refresh { border: 1px solid var(--orange); color: var(--white); background: transparent; cursor: pointer; font: 700 11px 'Manrope', sans-serif; }
+.google-login { width: 100%; min-height: 44px; margin: 28px 0 18px; background: var(--orange); }
+.google-login:hover, .drive-logout:hover, .drive-refresh:hover { background: var(--orange); }
+.drive-logout { padding: 8px 12px; }
+.drive-refresh { width: 34px; height: 34px; font-size: 19px; }
+.drive-user { color: var(--lavender); font: 11px 'DM Mono', monospace; }
+.drive-status { min-height: 20px; margin: 18px 0 8px; }
+.drive-config-note { margin: 22px 0 0; font: 10px 'DM Mono', monospace; }
+.drive-setup-note { display: grid; gap: 5px; margin-top: 18px; padding: 14px; border-left: 2px solid var(--orange); background: rgba(10, 3, 16, .35); }
+.drive-setup-note strong { font-size: 12px; }
 .download-box p { color: var(--muted); font-size: 14px; }
 .download-list { display: grid; gap: 12px; }
 .download-status { min-height: 150px; align-content: center; justify-items: center; text-align: center; }
@@ -90,6 +104,7 @@ section { scroll-margin-top: 76px; }
 .download-item strong { display: block; font-size: 14px; }
 .download-item span { color: var(--muted); font: 10px 'DM Mono', monospace; }
 .download-item a { color: var(--orange); font-size: 22px; }
+.download-item .drive-file-action { flex: 0 0 auto; font: 11px 'DM Mono', monospace; }
 .contact { padding: 88px 0; background: var(--panel); border-radius: 14px 14px 0 0; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
 form { display: grid; gap: 14px; }
@@ -124,6 +139,7 @@ footer { padding: 30px 0; border-top: 1px solid var(--line); color: var(--muted)
   .project:nth-child(even) .project-image { order: initial; }
   .project-image { height: 230px; }
   .download-grid { gap: 42px; }
+  .download-box { padding: 25px 20px; }
   .contact { padding: 65px 0; }
   .footer-inner { flex-direction: column; }
 }

@@ -114,13 +114,27 @@
         <div>
           <span class="eyebrow">04 · materiais</span>
           <h2>Downloads</h2>
-          <p class="section-intro">Meus materiais para Download.</p>
+          <p class="section-intro">Acesse meus materiais diretamente pelo Google Drive.</p>
         </div>
         <div class="download-box">
-          <div class="download-list download-status">
-            <span class="project-status-mark">✦</span>
-            <strong>Em andamento...</strong>
-            <span>Novos materiais serão disponibilizados em breve.</span>
+          <div class="drive-header">
+            <div>
+              <strong>Minha nuvem</strong>
+              <span class="drive-subtitle">Login necessário para visualizar os arquivos</span>
+            </div>
+            <button class="drive-refresh" type="button" aria-label="Atualizar arquivos" title="Atualizar arquivos" hidden>↻</button>
+          </div>
+          <button class="google-login" type="button">Entrar com Google</button>
+          <div class="drive-account" hidden>
+            <span class="drive-user"></span>
+            <button class="drive-logout" type="button">Sair</button>
+          </div>
+          <p class="drive-status" aria-live="polite">Entre com sua conta Google para carregar os arquivos.</p>
+          <div class="download-list" aria-live="polite"></div>
+          <p class="drive-config-note">O acesso é somente leitura e não salva seus dados neste site.</p>
+          <div class="drive-setup-note" hidden>
+            <strong>Configuração pendente</strong>
+            <span>Adicione o Client ID do Google Cloud no arquivo script.js.</span>
           </div>
         </div>
       </div>
@@ -163,6 +177,7 @@
       <span>© 2026 Matheus Gusmão.</span>
     </div>
   </footer>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="script.js"></script>
 </body>
