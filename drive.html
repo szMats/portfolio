@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gerenciador de arquivos do Google Drive de Matheus Gusmão.">
+  <title>Gerenciador do Drive | Matheus Gusmão</title>
+  <link rel="stylesheet" href="style.css?v=normal">
+  <link rel="stylesheet" href="drive.css?v=normal">
+</head>
+<body class="drive-page">
+  <main class="drive-shell">
+    <aside class="drive-sidebar">
+      <a class="brand" href="Index.HTML#inicio" aria-label="Voltar ao início">
+        <span class="brand-mark">M</span>
+        <span>Matheus Gusmão<small>MENINOMATS DRIVE</small></span>
+      </a>
+      <div class="drive-storage">
+        <div><strong>Nuvem</strong><span>17.8 GB / 400 GB</span></div>
+        <div class="storage-bar"><span></span></div>
+        <small>Fotos (12.4 GB)</small>
+        <small>Documentos (3.2 GB)</small>
+        <small>Apps (2.2 GB)</small>
+      </div>
+      <nav class="drive-nav" aria-label="Navegação do Drive">
+        <a class="active" href="#drive-files">↥ &nbsp;Últimos uploads</a>
+        <a href="#drive-files">▣ &nbsp;Últimos downloads</a>
+        <a href="Index.HTML#downloads">← &nbsp;Voltar ao portfólio</a>
+      </nav>
+      <div class="drive-sidebar-login">
+        <button class="google-login button primary" type="button">Entrar com Google</button>
+        <button class="drive-logout button" type="button" hidden>Sair</button>
+      </div>
+    </aside>
+
+    <main class="drive-main">
+      <div class="drive-content">
+        <div class="drive-page-heading">
+          <div><span class="eyebrow">Downloads</span><h1>Minha nuvem</h1></div>
+          <span class="drive-account-label">Privado · sincronizado com sua conta</span>
+        </div>
+
+        <section class="drive-upload-zone" aria-label="Enviar arquivos">
+          <span class="upload-mark">↥</span>
+          <strong>Arraste seus arquivos aqui</strong>
+          <span>Arquivos suportados</span>
+          <label class="drive-file-picker" for="drive-file-input">Selecionar arquivos</label>
+          <input id="drive-file-input" type="file" multiple disabled>
+        </section>
+
+        <div class="drive-section-link"><span>Ver todas as pastas →</span></div>
+        <section class="drive-folders" aria-label="Pastas">
+          <article><span class="folder-tab orange"></span><strong>Pasta 1</strong><small>4,5 GB</small></article>
+          <article><span class="folder-tab yellow"></span><strong>Pasta 2</strong><small>12 MB</small></article>
+          <article class="new-folder"><strong>Criar pasta</strong><span>+</span></article>
+        </section>
+
+        <section class="drive-manager" id="drive-files" aria-label="Arquivos do Drive">
+          <div class="drive-manager-heading"><h2>Meus arquivos</h2><span>Ver todos os arquivos →</span></div>
+          <div class="drive-toolbar">
+            <div class="drive-search-wrap"><label class="sr-only" for="drive-search">Buscar arquivos</label><input id="drive-search" type="search" placeholder="⌕  Buscar" disabled></div>
+            <div class="drive-toolbar-actions"><button class="drive-upload-button button" type="button" disabled>Enviar</button><button class="drive-refresh button" type="button" disabled>Atualizar</button></div>
+          </div>
+          <p class="drive-status" aria-live="polite">Entre com sua conta Google para carregar seus arquivos.</p>
+          <div class="drive-file-grid" aria-live="polite"></div>
+        </section>
+        <div class="drive-config-note">Acesso privado com OAuth do Google. O site não armazena sua senha nem seu token.</div>
+        <div class="drive-setup-note" hidden><strong>Configuração pendente</strong><span>Verifique o Client ID, a Google Drive API e os usuários de teste no Google Cloud.</span></div>
+      </div>
+    </main>
+  </main>
+
+  <dialog class="drive-preview-dialog">
+    <div class="preview-header">
+      <strong class="preview-title"></strong>
+      <button class="preview-close" type="button" aria-label="Fechar visualização">×</button>
+    </div>
+    <div class="preview-content"></div>
+  </dialog>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="drive.js"></script>
+</body>
+</html>

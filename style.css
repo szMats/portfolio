@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
 
 :root {
+  --font-body: 'Manrope', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-mono: 'DM Mono', monospace;
   --ink: #0a0310;
   --violet: #23043d;
   --panel: #171120;
@@ -14,13 +17,13 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; color: var(--white); background: var(--ink); font-family: 'Manrope', sans-serif; line-height: 1.6; }
+body { margin: 0; color: var(--white); background: var(--ink); font-family: var(--font-body); line-height: 1.6; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 .container { width: min(1120px, calc(100% - 56px)); margin: 0 auto; }
 .eyebrow { color: var(--orange); font: 500 11px 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
 h1, h2, h3, p { margin-top: 0; }
-h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.02; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.02; }
 h2 { font-size: clamp(38px, 5vw, 64px); margin-bottom: 18px; }
 h3 { font-size: 28px; margin-bottom: 12px; }
 .section-intro { max-width: 560px; color: var(--muted); font-size: 14px; }
@@ -42,9 +45,11 @@ h3 { font-size: 28px; margin-bottom: 12px; }
 .hero h1 span { color: var(--white); }
 .hero-copy p { max-width: 460px; color: var(--muted); font-size: 15px; }
 .actions { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
-.button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border: 1px solid var(--orange); color: var(--white); font-size: 12px; font-weight: 700; transition: transform .2s ease, background .2s ease; }
+.button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 10px 20px; border: 1px solid var(--orange); color: var(--white); font-size: 12px; font-weight: 700; line-height: 1.25; text-align: center; white-space: nowrap; transition: transform .2s ease, background .2s ease; }
 .button:hover { transform: translateY(-3px); background: var(--orange); }
 .button.primary { background: var(--orange); }
+button, input, textarea { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--lavender); outline-offset: 3px; }
 .hero-art { min-height: 570px; position: relative; display: flex; align-items: end; justify-content: center; }
 .hero-art img { height: 600px; width: min(100%, 520px); object-fit: contain; object-position: center bottom; filter: drop-shadow(0 20px 38px rgba(86, 20, 126, .3)); animation: float 5s ease-in-out infinite; }
 .art-label { position: absolute; right: 0; bottom: 90px; padding: 11px 16px; color: var(--lavender); background: var(--panel-light); font: 10px 'DM Mono', monospace; }
@@ -81,26 +86,6 @@ section { scroll-margin-top: 76px; }
 .downloads { padding: 110px 0; }
 .download-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 70px; align-items: center; }
 .download-box { padding: 34px; border: 1px solid var(--line); background: linear-gradient(135deg, var(--panel), var(--violet)); }
-.drive-header, .drive-account { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-.drive-header strong { display: block; font-family: 'Playfair Display', serif; font-size: 24px; }
-.drive-subtitle, .drive-status, .drive-config-note, .drive-setup-note span { display: block; color: var(--muted); font-size: 12px; }
-.drive-subtitle { margin-top: 3px; }
-.google-login, .drive-logout, .drive-refresh { border: 1px solid var(--orange); color: var(--white); background: transparent; cursor: pointer; font: 700 11px 'Manrope', sans-serif; }
-.google-login { width: 100%; min-height: 44px; margin: 28px 0 18px; background: var(--orange); }
-.google-login:hover, .drive-logout:hover, .drive-refresh:hover { background: var(--orange); }
-.drive-logout { padding: 8px 12px; }
-.drive-refresh { width: 34px; height: 34px; font-size: 19px; }
-.drive-user { color: var(--lavender); font: 11px 'DM Mono', monospace; }
-.drive-upload { display: flex; align-items: center; gap: 10px; margin-top: 22px; }
-.drive-file-picker, .drive-upload-button { min-height: 38px; padding: 10px 13px; border: 1px solid var(--orange); color: var(--white); cursor: pointer; font: 700 10px 'Manrope', sans-serif; }
-.drive-file-picker { display: inline-flex; align-items: center; }
-.drive-file-picker:hover, .drive-upload-button:not(:disabled):hover { background: var(--orange); }
-.drive-upload-button:disabled { cursor: not-allowed; opacity: .45; }
-#drive-file-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.drive-status { min-height: 20px; margin: 18px 0 8px; }
-.drive-config-note { margin: 22px 0 0; font: 10px 'DM Mono', monospace; }
-.drive-setup-note { display: grid; gap: 5px; margin-top: 18px; padding: 14px; border-left: 2px solid var(--orange); background: rgba(10, 3, 16, .35); }
-.drive-setup-note strong { font-size: 12px; }
 .download-box p { color: var(--muted); font-size: 14px; }
 .download-list { display: grid; gap: 12px; }
 .download-status { min-height: 150px; align-content: center; justify-items: center; text-align: center; }
@@ -110,9 +95,6 @@ section { scroll-margin-top: 76px; }
 .download-item strong { display: block; font-size: 14px; }
 .download-item span { color: var(--muted); font: 10px 'DM Mono', monospace; }
 .download-item a { color: var(--orange); font-size: 22px; }
-.drive-file-actions { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
-.drive-file-actions .drive-file-action { border: 0; color: var(--orange); background: transparent; cursor: pointer; font: 11px 'DM Mono', monospace; }
-.drive-file-actions .drive-file-action:disabled { cursor: wait; opacity: .6; }
 .contact { padding: 88px 0; background: var(--panel); border-radius: 14px 14px 0 0; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
 form { display: grid; gap: 14px; }
@@ -148,8 +130,6 @@ footer { padding: 30px 0; border-top: 1px solid var(--line); color: var(--muted)
   .project-image { height: 230px; }
   .download-grid { gap: 42px; }
   .download-box { padding: 25px 20px; }
-  .drive-upload { align-items: stretch; flex-direction: column; }
-  .drive-file-picker, .drive-upload-button { justify-content: center; text-align: center; }
   .contact { padding: 65px 0; }
   .footer-inner { flex-direction: column; }
 }

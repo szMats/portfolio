@@ -30,7 +30,7 @@ document.querySelectorAll('.nav-links a').forEach((link) => {
 const contactForm = document.querySelector('#contact-form');
 
 function setupDrive() {
-  if (!drivePanel) return;
+  if (!drivePanel || !drivePanel.querySelector('.google-login')) return;
 
   const loginButton = drivePanel.querySelector('.google-login');
   const logoutButton = drivePanel.querySelector('.drive-logout');
