@@ -91,6 +91,12 @@ section { scroll-margin-top: 76px; }
 .drive-logout { padding: 8px 12px; }
 .drive-refresh { width: 34px; height: 34px; font-size: 19px; }
 .drive-user { color: var(--lavender); font: 11px 'DM Mono', monospace; }
+.drive-upload { display: flex; align-items: center; gap: 10px; margin-top: 22px; }
+.drive-file-picker, .drive-upload-button { min-height: 38px; padding: 10px 13px; border: 1px solid var(--orange); color: var(--white); cursor: pointer; font: 700 10px 'Manrope', sans-serif; }
+.drive-file-picker { display: inline-flex; align-items: center; }
+.drive-file-picker:hover, .drive-upload-button:not(:disabled):hover { background: var(--orange); }
+.drive-upload-button:disabled { cursor: not-allowed; opacity: .45; }
+#drive-file-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .drive-status { min-height: 20px; margin: 18px 0 8px; }
 .drive-config-note { margin: 22px 0 0; font: 10px 'DM Mono', monospace; }
 .drive-setup-note { display: grid; gap: 5px; margin-top: 18px; padding: 14px; border-left: 2px solid var(--orange); background: rgba(10, 3, 16, .35); }
@@ -104,7 +110,9 @@ section { scroll-margin-top: 76px; }
 .download-item strong { display: block; font-size: 14px; }
 .download-item span { color: var(--muted); font: 10px 'DM Mono', monospace; }
 .download-item a { color: var(--orange); font-size: 22px; }
-.download-item .drive-file-action { flex: 0 0 auto; font: 11px 'DM Mono', monospace; }
+.drive-file-actions { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+.drive-file-actions .drive-file-action { border: 0; color: var(--orange); background: transparent; cursor: pointer; font: 11px 'DM Mono', monospace; }
+.drive-file-actions .drive-file-action:disabled { cursor: wait; opacity: .6; }
 .contact { padding: 88px 0; background: var(--panel); border-radius: 14px 14px 0 0; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
 form { display: grid; gap: 14px; }
@@ -140,6 +148,8 @@ footer { padding: 30px 0; border-top: 1px solid var(--line); color: var(--muted)
   .project-image { height: 230px; }
   .download-grid { gap: 42px; }
   .download-box { padding: 25px 20px; }
+  .drive-upload { align-items: stretch; flex-direction: column; }
+  .drive-file-picker, .drive-upload-button { justify-content: center; text-align: center; }
   .contact { padding: 65px 0; }
   .footer-inner { flex-direction: column; }
 }
