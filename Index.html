@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css?v=normal">
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="#inicio" aria-label="Voltar ao início">
@@ -17,8 +18,8 @@
           <small>MENINOMATS</small>
         </span>
       </a>
-      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" aria-label="Navegação principal">
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="primary-navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="primary-navigation" aria-label="Navegação principal">
         <a class="active" href="#inicio">Início</a>
         <a href="#sobre">Sobre</a>
         <a href="#projetos">Projetos</a>
@@ -28,24 +29,23 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo">
     <section class="hero" id="inicio">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">Matheus · Mats</span>
-          <h1>Quem sou eu? O que faço?</h1>
-          <p>Este é um Portfolio teste que sera atualizado de acordo com oque eu faço e penso, um diário profissional, e pessoal, com interesses e preferências.</p>
+          <span class="eyebrow">Portfólio pessoal · Mats</span>
+          <h1>Matheus Gusmão</h1>
+          <p>Estudante de Engenharia de Software e Jovem Aprendiz no Sicredi. Este espaço reúne minha trajetória, meus interesses e os projetos que estou construindo.</p>
           <div class="actions">
-            <a class="button primary" href="#projetos">Explorar portfólio</a>
-            <a class="button" href="#sobre">Conhecer Matheus</a>
+            <a class="button primary" href="#sobre">Conhecer minha trajetória</a>
+            <a class="button" href="#projetos">Ver projetos</a>
           </div>
         </div>
         <div class="hero-art">
-          <img src="Images/Avatar.png" alt="Personagem ilustrado com fones e detalhes em roxo">
+          <img src="Images/Avatar.png" alt="Ilustração de uma pessoa com fones de ouvido em tons de roxo" fetchpriority="high">
           <div class="art-label">
-            <a href="https://www.youtube.com/watch?v=HiQ8BVMyF6Q" target="_blank" rel="noopener noreferrer">Sara Kays - Remember That Night?</a>
-            <span> · </span>
-            <a href="https://www.youtube.com/watch?v=hT_nvWreIhg" target="_blank" rel="noopener noreferrer">OneRepublic - Counting Stars</a>
+            <span class="art-label-index">MATS / 2026</span>
+            <span>Curiosidade em movimento.</span>
           </div>
         </div>
       </div>
@@ -54,41 +54,41 @@
     <section class="about" id="sobre">
       <div class="container about-grid">
         <aside>
-          <img class="portrait" src="Images/EU.jpg" alt="Retrato de Matheus Gusmão">
+          <img class="portrait" src="Images/EU.jpg" alt="Retrato de Matheus Gusmão" loading="lazy" decoding="async">
           <div class="contact-mini">
-            <strong>contato / canais</strong>
-            <p><a href="#contato">✉ meninomats@gmail.com</a></p>
-            <p><a href="https://www.instagram.com/matheussg.23" target="_blank" rel="noopener noreferrer">◎ @matheussg.23</a></p>
-            <p><a href="https://www.youtube.com/@meninomats" target="_blank" rel="noopener noreferrer">▶ YouTube · meninomats</a></p>
-            <p><a href="https://www.twitch.tv/meninomats" target="_blank" rel="noopener noreferrer">◉ Twitch · meninomats</a></p>
+            <strong>ENCONTRE-ME</strong>
+            <a href="mailto:meninomats@gmail.com">E-mail <span>meninomats@gmail.com</span></a>
+            <a href="https://www.instagram.com/matheussg.23" target="_blank" rel="noopener noreferrer">Instagram <span>@matheussg.23</span></a>
+            <a href="https://www.youtube.com/@meninomats" target="_blank" rel="noopener noreferrer">YouTube <span>@meninomats</span></a>
+            <a href="https://www.twitch.tv/meninomats" target="_blank" rel="noopener noreferrer">Twitch <span>@meninomats</span></a>
           </div>
         </aside>
         <div class="about-copy">
-          <span class="eyebrow">01 · perfil</span>
-          <h2>Quem sou eu?</h2>
-          <p>Me chamo Matheus Gusmão, geralmente chamado de Mats, estou me formando em Engenharia de Software e sou um aficionado por tecnologia e criação.</p>
-          <p>Um Jovem Aprendiz, atualmente no meu trabalho atuo no operacional da equipe de Desenvolvimento do Cooperativismo.</p>
-          <h3>Trajetória profissional</h3>
+          <span class="eyebrow">01 · sobre</span>
+          <h2>Tecnologia, curiosidade e criação.</h2>
+          <p>Sou Matheus Gusmão, geralmente chamado de Mats. Estou cursando Engenharia de Software na Unicesumar e tenho previsão de conclusão em 2028.</p>
+          <p>Trabalho como Jovem Aprendiz no Sicredi, na equipe de Desenvolvimento do Cooperativismo. Gosto de aproximar tecnologia, aprendizado e criação.</p>
+          <h3>Minha trajetória</h3>
           <div class="timeline">
             <div class="timeline-row">
-              <time>2023 · Hoje</time>
+              <time datetime="2023">2023 — 2028</time>
               <div>
-                <strong>Formação · ESOFT</strong>
-                <span>Estou cursando Engenharia de Software, na Unicesumar com previsão de conclusão em 2028.</span>
+                <strong>Engenharia de Software</strong>
+                <span>Graduação em andamento na Unicesumar.</span>
               </div>
             </div>
             <div class="timeline-row">
-              <time>2025 · Hoje</time>
+              <time datetime="2025">2025 — atual</time>
               <div>
-                <strong>Profissional</strong>
-                <span>Sou Jovem Aprendiz na Cooperativa Sicredi.</span>
+                <strong>Jovem Aprendiz · Sicredi</strong>
+                <span>Atuação na equipe de Desenvolvimento do Cooperativismo.</span>
               </div>
             </div>
             <div class="timeline-row">
-              <time>20/09/2026</time>
+              <time datetime="2026-09-20">2026</time>
               <div>
-                <strong>Este Projeto</strong>
-                <span>Início do projeto de portfólio. </span>
+                <strong>Portfólio pessoal</strong>
+                <span>Um espaço em evolução para compartilhar aprendizados e projetos.</span>
               </div>
             </div>
           </div>
@@ -98,13 +98,17 @@
 
     <section class="projects" id="projetos">
       <div class="container">
-        <span class="eyebrow">02 · portfólio</span>
-        <h2>Projetos selecionados</h2>
-        <p class="section-intro">Uma seleção de trabalhos que exploram mundos, personagens, atmosferas e maneiras de contar uma boa história.</p>
+        <span class="eyebrow">02 · projetos</span>
+        <h2>Ideias em construção.</h2>
+        <p class="section-intro">Este espaço vai reunir projetos pessoais, estudos e experimentos à medida que ganharem forma.</p>
         <div class="project-status">
-          <span class="project-status-mark">✦</span>
-          <h3>Em Andamento...</h3>
-          <p>Novos projetos serão publicados em breve.</p>
+          <span class="project-status-mark" aria-hidden="true">01</span>
+          <div class="project-status-copy">
+            <span class="eyebrow">PRÓXIMO CAPÍTULO</span>
+            <h3>Primeiros projetos em desenvolvimento</h3>
+            <p>Novos trabalhos serão adicionados conforme forem concluídos.</p>
+          </div>
+          <a class="project-link" href="#contato">Conversar sobre uma ideia <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -112,29 +116,16 @@
     <section class="downloads" id="downloads">
       <div class="container download-grid">
         <div>
-          <span class="eyebrow">04 · materiais</span>
-          <h2>Downloads</h2>
-          <p class="section-intro">Acesse meus materiais diretamente pelo Google Drive.</p>
+          <span class="eyebrow">03 · arquivos</span>
+          <h2>Materiais e arquivos.</h2>
+          <p class="section-intro">Um espaço privado conectado ao Google Drive para organizar, visualizar e compartilhar meus arquivos.</p>
         </div>
         <div class="download-box">
-          <div class="drive-header">
-            <div>
-              <strong>Minha nuvem</strong>
-              <span class="drive-subtitle">Login necessário para visualizar os arquivos</span>
-            </div>
-            <button class="drive-refresh" type="button" aria-label="Atualizar arquivos" title="Atualizar arquivos" hidden>↻</button>
-          </div>
-          <button class="google-login" type="button">Entrar com Google</button>
-          <div class="drive-account" hidden>
-            <span class="drive-user"></span>
-            <button class="drive-logout" type="button">Sair</button>
-          </div>
-          <p class="drive-status" aria-live="polite">Entre com sua conta Google para carregar os arquivos.</p>
-          <div class="download-list" aria-live="polite"></div>
-          <p class="drive-config-note">O acesso é somente leitura e não salva seus dados neste site.</p>
-          <div class="drive-setup-note" hidden>
-            <strong>Configuração pendente</strong>
-            <span>Adicione o Client ID do Google Cloud no arquivo script.js.</span>
+          <div class="download-list download-status">
+            <span class="download-index">DRIVE / 01</span>
+            <strong>Gerenciador do Drive</strong>
+            <span>Acesso privado com autenticação do Google.</span>
+            <a class="button primary" href="drive.html">Acessar meus arquivos <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </div>
@@ -143,9 +134,9 @@
     <section class="contact" id="contato">
       <div class="container contact-grid">
         <div>
-          <span class="eyebrow">05 · Contato</span>
-          <h2>Quer entrar em contato?</h2>
-          <p class="section-intro">Escreva uma mensagem e me envie!</p>
+          <span class="eyebrow">04 · contato</span>
+          <h2>Uma boa conversa começa por aqui.</h2>
+          <p class="section-intro">Tem uma ideia, pergunta ou oportunidade? Escreva para mim.</p>
          
         </div>
         <form id="contact-form" action="https://formsubmit.co/ajax/meninomats@gmail.com" method="POST">
@@ -173,11 +164,11 @@
 
   <footer>
     <div class="container footer-inner">
-      <span><strong style="color: var(--white);">Mats</strong><br>Tudo bem?</span>
-      <span>© 2026 Matheus Gusmão.</span>
+      <a class="footer-brand" href="#inicio"><span class="brand-mark">M</span><span>Matheus Gusmão<small>MENINOMATS</small></span></a>
+      <span>© 2026 · Feito com curiosidade e cuidado.</span>
+      <a class="footer-top" href="#inicio">Voltar ao início ↑</a>
     </div>
   </footer>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="script.js"></script>
 </body>

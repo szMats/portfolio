@@ -21,10 +21,48 @@ if (portrait) {
 menuToggle.addEventListener('click', () => {
   const isOpen = navLinks.classList.toggle('open');
   menuToggle.setAttribute('aria-expanded', isOpen);
+  menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
 });
 
 document.querySelectorAll('.nav-links a').forEach((link) => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menu');
+  });
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menu');
+    menuToggle.focus();
+  }
+});
+
+const navigationSections = [...document.querySelectorAll('main section[id]')];
+if ('IntersectionObserver' in window) {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      document.querySelectorAll('.nav-links a').forEach((link) => {
+        const isCurrent = link.hash === `#${entry.target.id}`;
+        link.classList.toggle('active', isCurrent);
+        if (isCurrent) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  navigationSections.forEach((section) => sectionObserver.observe(section));
+}
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 760 && navLinks.classList.contains('open')) {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menu');
+  }
 });
 
 const contactForm = document.querySelector('#contact-form');
