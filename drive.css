@@ -699,13 +699,10 @@
 }
 
 .folder-tab {
-  width: 28px;
-  height: 17px;
-  border-radius: 3px 3px 0 0;
-  background: var(--mint);
+  width: 48px;
+  height: 42px;
+  background: url('Images/Pasta.png') center / contain no-repeat;
 }
-
-.folder-tab.yellow { background: #e8b15e; }
 
 .drive-folder-open strong {
   max-width: 100%;
@@ -846,7 +843,7 @@
 .drive-file-icon--pdf { background-image: url('Images/PDF.png'); }
 .drive-file-icon--presentation { background-image: url('Images/Apresenta%C3%A7%C3%B5es.png'); }
 .drive-file-icon--spreadsheet { background-image: url('Images/Planilhas.png'); }
-.drive-file-icon--generic { background-image: url('Images/Icons.png'); }
+.drive-file-icon--generic { background-image: url('Images/Arquivo_nao_identificado.png'); }
 
 .drive-file-info strong {
   display: block;

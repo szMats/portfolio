@@ -2,6 +2,7 @@ const GOOGLE_CLIENT_ID = '674912689892-qbsuo8r9hri5psg9aceh6bnef9iq1uok.apps.goo
 const DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive';
 const REMEMBER_LOGIN_KEY = 'drive-login-expiration';
 const REMEMBER_LOGIN_DURATION = 30 * 24 * 60 * 60 * 1000;
+const DRIVE_SESSION_EXPIRED = 'drive-session-expired';
 
 const loginButton = document.querySelector('.google-login');
 const logoutButton = document.querySelector('.drive-logout');
@@ -79,9 +80,7 @@ function restoreRememberedLogin() {
     clearRememberedLogin();
     return;
   }
-  restoringLogin = true;
-  loginButton.disabled = true;
-  driveTokenClient.requestAccessToken({ prompt: '' });
+  requestSilentDriveToken();
 }
 
 function resetStorageUsage(message = 'Conecte-se para consultar') {
@@ -90,6 +89,41 @@ function resetStorageUsage(message = 'Conecte-se para consultar') {
   storageFill.style.width = '0%';
   storageBar.setAttribute('aria-valuenow', '0');
   storageBar.setAttribute('aria-valuetext', message);
+}
+
+function resetDriveSession(message = 'Entre com sua conta Google para carregar seus arquivos.') {
+  driveAccessToken = '';
+  allFiles = [];
+  allFolders = [];
+  currentFolderId = 'root';
+  folderPath = [];
+  searchInput.value = '';
+  fileInput.value = '';
+  fileGrid.replaceChildren();
+  folderGrid.replaceChildren();
+  folderBreadcrumb.replaceChildren();
+  loginButton.hidden = false;
+  loginButton.disabled = false;
+  rememberLoginLabel.hidden = false;
+  logoutButton.hidden = true;
+  setControls(false);
+  uploadButton.disabled = true;
+  status.textContent = message;
+  resetStorageUsage();
+}
+
+function requestSilentDriveToken() {
+  if (!driveTokenClient) return;
+  restoringLogin = true;
+  loginButton.disabled = true;
+  status.textContent = 'Reconectando ao Google...';
+  try {
+    driveTokenClient.requestAccessToken({ prompt: '' });
+  } catch {
+    restoringLogin = false;
+    clearRememberedLogin();
+    resetDriveSession('Não foi possível restaurar o acesso automaticamente. Entre novamente com o Google.');
+  }
 }
 
 function showError(message) {
@@ -129,9 +163,8 @@ async function handleDriveToken(response) {
   if (response.error) {
     if (restoringLogin) {
       restoringLogin = false;
-      loginButton.disabled = false;
       clearRememberedLogin();
-      showError('Não foi possível restaurar o acesso automaticamente. Entre novamente com o Google.');
+      resetDriveSession('Não foi possível restaurar o acesso automaticamente. Entre novamente com o Google.');
       return;
     }
     showError(response.error === 'access_denied'
@@ -173,7 +206,8 @@ async function loadStorageUsage() {
     storageBar.setAttribute('aria-valuetext', hasLimit
       ? `${formatBytes(totalUsed)} usados de ${formatBytes(limit)}`
       : `${formatBytes(totalUsed)} usados`);
-  } catch {
+  } catch (error) {
+    if (error.code === DRIVE_SESSION_EXPIRED) return;
     storageUsageLabel.textContent = 'Indisponível';
     storageDetail.textContent = 'Não foi possível consultar a cota da conta.';
     storageFill.style.width = '0%';
@@ -198,7 +232,12 @@ async function driveRequest(url, options = {}) {
       errorData = null;
     }
     if (response.status === 403) throw new Error(formatDrivePermissionError(errorData));
-    if (response.status === 401) throw new Error('Sua sessão expirou. Entre novamente com o Google.');
+    if (response.status === 401) {
+      const error = new Error('Sua sessão expirou. Entre novamente com o Google.');
+      error.code = DRIVE_SESSION_EXPIRED;
+      resetDriveSession(error.message);
+      throw error;
+    }
     throw new Error(`Drive request failed: ${response.status}`);
   }
   return response;
@@ -249,6 +288,7 @@ async function loadDriveFiles() {
     renderFolders();
     renderFiles();
   } catch (error) {
+    if (error.code === DRIVE_SESSION_EXPIRED) return;
     showError(error.message.includes('Drive request failed')
       ? 'Não foi possível carregar seus arquivos. Verifique a configuração do Google Cloud.'
       : error.message);
@@ -765,21 +805,7 @@ async function previewFile(file) {
 logoutButton.addEventListener('click', () => {
   if (driveAccessToken) window.google.accounts.oauth2.revoke(driveAccessToken);
   clearRememberedLogin();
-  driveAccessToken = '';
-  allFiles = [];
-  allFolders = [];
-  currentFolderId = 'root';
-  folderPath = [];
-  fileGrid.replaceChildren();
-  folderGrid.replaceChildren();
-  folderBreadcrumb.replaceChildren();
-  loginButton.hidden = false;
-  rememberLoginLabel.hidden = false;
-  logoutButton.hidden = true;
-  setControls(false);
-  uploadButton.disabled = true;
-  status.textContent = 'Entre com sua conta Google para carregar seus arquivos.';
-  resetStorageUsage();
+  resetDriveSession();
 });
 rememberLoginCheckbox.addEventListener('change', () => {
   if (!rememberLoginCheckbox.checked) clearRememberedLogin();
@@ -824,6 +850,10 @@ document.querySelector('.preview-zoom-in').addEventListener('click', () => setIm
 document.querySelector('.preview-zoom-reset').addEventListener('click', () => setImageZoom(1));
 previewDialog.addEventListener('click', (event) => {
   if (event.target === previewDialog) previewDialog.close();
+});
+
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted && driveAccessToken && driveTokenClient) requestSilentDriveToken();
 });
 
 setControls(false);
