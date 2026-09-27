@@ -57,7 +57,9 @@ function setupDrive() {
 
 async function handleDriveToken(response) {
   if (response.error) {
-    showError('Não foi possível conectar ao Google. Verifique os usuários de teste e tente novamente.');
+    showError(response.error === 'access_denied'
+      ? 'Acesso recusado pelo Google. Confirme se sua conta está nos usuários de teste do OAuth.'
+      : `Não foi possível conectar ao Google${response.error_description ? `: ${response.error_description}` : '.'}`);
     return;
   }
   driveAccessToken = response.access_token;
@@ -76,11 +78,31 @@ async function driveRequest(url, options = {}) {
     }
   });
   if (!response.ok) {
-    if (response.status === 403) throw new Error('Acesso negado. Confirme a Google Drive API e o escopo drive no OAuth.');
+    let errorData = null;
+    try {
+      errorData = await response.clone().json();
+    } catch {
+      errorData = null;
+    }
+    if (response.status === 403) throw new Error(formatDrivePermissionError(errorData));
     if (response.status === 401) throw new Error('Sua sessão expirou. Entre novamente com o Google.');
     throw new Error(`Drive request failed: ${response.status}`);
   }
   return response;
+}
+
+function formatDrivePermissionError(errorData) {
+  const reason = errorData?.error?.errors?.[0]?.reason;
+  if (reason === 'accessNotConfigured' || reason === 'SERVICE_DISABLED') {
+    return 'A Google Drive API está desativada neste projeto. Ative-a no Google Cloud e tente novamente.';
+  }
+  if (reason === 'insufficientPermissions') {
+    return 'O token não recebeu o escopo drive. Saia, entre novamente e aceite a permissão para acessar o Google Drive.';
+  }
+  if (reason === 'dailyLimitExceeded' || reason === 'quotaExceeded') {
+    return 'A cota da Google Drive API foi excedida. Verifique as cotas do projeto no Google Cloud.';
+  }
+  return 'Acesso negado pela Google Drive API. Confirme se a API está ativa e se o escopo drive foi autorizado no OAuth.';
 }
 
 async function loadDriveFiles() {
