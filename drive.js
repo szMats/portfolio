@@ -9,6 +9,7 @@ const logoutButton = document.querySelector('.drive-logout');
 const refreshButton = document.querySelector('.drive-refresh');
 const searchInput = document.querySelector('#drive-search');
 const fileInput = document.querySelector('#drive-file-input');
+const filePickerButton = document.querySelector('.drive-file-picker');
 const uploadButton = document.querySelector('.drive-upload-button');
 const storageUsageLabel = document.querySelector('.drive-storage-usage');
 const storageDetail = document.querySelector('.drive-storage-detail');
@@ -42,6 +43,7 @@ function setControls(enabled) {
   searchInput.disabled = !enabled;
   refreshButton.disabled = !enabled;
   fileInput.disabled = !enabled;
+  filePickerButton.disabled = !enabled;
   createFolderButton.disabled = !enabled;
 }
 
@@ -537,7 +539,7 @@ async function downloadFile(file, button) {
     link.href = URL.createObjectURL(blob);
     link.download = exportData ? `${file.name}${exportData[1]}` : file.name;
     link.click();
-    URL.revokeObjectURL(link.href);
+    window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
   } catch (error) {
     showError(`Não foi possível baixar ${file.name}.`);
   } finally {
@@ -573,7 +575,7 @@ async function uploadFiles() {
   } catch (error) {
     showError(`Não foi possível enviar os arquivos. ${error.message}`);
   } finally {
-    uploadButton.disabled = true;
+    uploadButton.disabled = fileInput.files.length === 0;
   }
 }
 
@@ -822,6 +824,7 @@ document.querySelectorAll('.drive-nav a[href^="#"]').forEach((link) => {
   });
 });
 createFolderButton.addEventListener('click', createFolder);
+filePickerButton.addEventListener('click', () => fileInput.click());
 searchInput.addEventListener('input', renderFiles);
 fileInput.addEventListener('change', () => { uploadButton.disabled = fileInput.files.length === 0; });
 uploadButton.addEventListener('click', uploadFiles);

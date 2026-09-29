@@ -43,15 +43,15 @@
         </div>
 
         <section class="drive-upload-zone" aria-label="Enviar arquivos">
-          <span class="upload-mark">↥</span>
+          <span class="upload-mark" aria-hidden="true">↥</span>
           <strong>Arraste seus arquivos aqui</strong>
           <span>Arquivos suportados</span>
-          <label class="drive-file-picker" for="drive-file-input">Selecionar arquivos</label>
+          <button class="drive-file-picker" type="button" disabled>Selecionar arquivos</button>
           <input id="drive-file-input" type="file" multiple disabled>
         </section>
 
         <div class="drive-section-link">
-          <span>Pastas</span>
+          <h2>Pastas</h2>
           <button class="drive-create-folder" type="button" disabled><span aria-hidden="true">+</span> Criar pasta</button>
         </div>
         <nav class="drive-breadcrumb" aria-label="Caminho das pastas"></nav>

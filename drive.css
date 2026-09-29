@@ -570,6 +570,11 @@
   font: 11px var(--font-mono);
 }
 
+.drive-section-link h2 {
+  margin: 0;
+  font: 16px var(--font-display);
+}
+
 .drive-file-picker {
   display: inline-flex;
   align-items: center;
@@ -578,13 +583,19 @@
   border-radius: 3px;
   border: 1px solid var(--orange);
   color: var(--white);
+  background: transparent;
   cursor: pointer;
   font: 10px var(--font-mono);
   transition: background .2s ease, color .2s ease;
 }
 
-.drive-file-picker:hover {
+.drive-file-picker:hover:not(:disabled) {
   background: var(--orange);
+}
+
+.drive-file-picker:disabled {
+  cursor: not-allowed;
+  opacity: .45;
 }
 
 #drive-file-input {
@@ -901,6 +912,10 @@
 .drive-page a:focus-visible,
 .drive-page input:focus-visible {
   outline-color: var(--mint);
+}
+
+.drive-page [hidden] {
+  display: none;
 }
 
 .preview-header {
