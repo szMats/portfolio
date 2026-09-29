@@ -140,8 +140,17 @@ function setupDrive() {
     return;
   }
 
+  let googleLoadAttempts = 0;
   const waitForGoogle = window.setInterval(() => {
-    if (!window.google?.accounts?.oauth2) return;
+    if (!window.google?.accounts?.oauth2) {
+      googleLoadAttempts += 1;
+      if (googleLoadAttempts >= 50) {
+        window.clearInterval(waitForGoogle);
+        loginButton.disabled = true;
+        showError('Não foi possível carregar o login do Google. Verifique sua conexão e recarregue a página.');
+      }
+      return;
+    }
     window.clearInterval(waitForGoogle);
     driveTokenClient = window.google.accounts.oauth2.initTokenClient({
       client_id: GOOGLE_CLIENT_ID,
